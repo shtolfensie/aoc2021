@@ -1,5 +1,5 @@
 {-# LANGUAGE ScopedTypeVariables #-}
-import AOC
+import AOC hiding(Down)
 import Data.Char
 import Data.Tuple.HT
 
@@ -34,20 +34,12 @@ p = do
   amount <- many1 digit
   return (dirStr, read amount)
 
-f :: [(Dir, Int)] -> Int
-f xs = uncurry (*) $ (\(x,y,z) -> (x,y)) $ foldl c (0,0,0) xs
-  where
-    c :: (Int, Int, Int) -> (Dir, Int) -> (Int, Int, Int)
-    c acc coord
-      | dir == Forward = (h+a, d+(aim*a), aim)
-      | dir == Down = (h, d, aim+a)
-      | dir == Up = (h, d, aim-a)
-      | otherwise = acc
-      where
-        dir = fst coord
-        a = snd coord
-        h = fst3 acc
-        d = snd3 acc
-        aim = thd3 acc
+move (x, y, a) (Forward, n) = (x+n, y+(a*n), a)
+move (x, y, a) (Down, n) = (x, y, a+n)
+move (x, y, a) (Up, n) = (x, y, a-n)
 
+f :: [(Dir, Int)] -> Int
+f xs = x * y
+  where
+    (x, y, _) = foldl move (0,0,0) xs
 
