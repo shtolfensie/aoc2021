@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+
+t="$(make 2>&1)"
+# echo $t
+
+watchexec --exts hs 't="$(make 2>&1)"; printf "\033c"; printf "%s" "$t";'
+
+
+# fswatch -o --event Updated --event Created -e ".*" -i ".*\\.hs$" . \
+#   | xargs -I{} sh -c 't="$(make 2>&1)"; echo "[2J[H$t"'

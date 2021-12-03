@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# TODO(filip): check that .scripts dir exists
+DAY=$(cat .scripts/day)
+
+[ -f "$DAY"a.hs ] && cp "$DAY"a.hs "$DAY"b.hs

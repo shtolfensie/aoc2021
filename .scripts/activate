@@ -1,0 +1,36 @@
+#!/bin/bash
+
+export PATH="$PATH":$PWD/.scripts
+
+function trackie_start() {
+  trackie start aoc:$@
+}
+
+function greet_msg() {
+  echo "Merry Christmas! - day: $@"
+}
+
+[[ -d .scripts ]] || { echo ".scripts directory doesn't exist!"; exit; } 
+
+(
+  cd .scripts
+
+  if [ $# -eq 0 ]; then
+    greet_msg $(cat day)
+  elif [[ "$@" = t ]]; then # t = today
+    date +%-e > day
+    greet_msg $(cat day)
+    trackie_start $(date +%-e )
+  elif [[ "$@" = start ]]; then
+    trackie_start $(cat day)
+  elif [[ "$@" = stop ]]; then
+    trackie stop
+  else
+    # TODO(filip): this leads to a lot of invalid day! fix!
+    # maybe check for a -d flag? or just day {num}
+    echo "$@" > day
+  fi
+)
+
+
+./.scripts/get # PWD is root AOC dir

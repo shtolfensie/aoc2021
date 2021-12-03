@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# shhh!
+. ./.scripts/.cookie
+
+DAY=$(cat ./.scripts/day)
+YEAR=$(date +%-Y)
+
+[ -f $DAY.input ] && exit
+
+curl -o $DAY.input -b "$AOC_COOKIE" https://adventofcode.com/$YEAR/day/$DAY/input
+
+
+
+
