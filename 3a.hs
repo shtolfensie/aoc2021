@@ -3,18 +3,13 @@ import Data.List
 
 -- 3a: 3813416
 
-main = interactl f
+main = interactl f'
 
-toDec = foldl (\y x -> fromEnum x + y*2) 0
+both =  map ((\(o,z) -> (length z < length o, length z > length o)) . partition (=='1'))
 
-mostcommon ll = toDec . map ((\l -> ll-l < l) . length . filter (=='1'))
+toDecTuple :: [(Bool, Bool)] -> (Int, Int)
+toDecTuple = foldl (\(a,b) (x,y) -> (fromEnum x + a*2, fromEnum y + b*2)) (0,0)
 
-leastcommon ll = toDec . map ((\l -> ll-l > l) . length . filter (=='1'))
-
-f xs = gamma * epsilon
+f' xs = uncurry (*) res
   where
-    gamma = mostcommon cl cols
-    epsilon = leastcommon cl cols
-    cl = length $ head cols
-    cols = transpose xs
-
+    res = toDecTuple $ both $ transpose xs

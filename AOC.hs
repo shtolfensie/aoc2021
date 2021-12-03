@@ -13,3 +13,6 @@ type Parser = Parsec String ()
 
 parse :: Parser a -> String -> Either ParseError a
 parse p = Parsec.parse p ""
+
+toDec :: [Bool] -> Int
+toDec = foldl (\y x -> fromEnum x + y*2) 0
