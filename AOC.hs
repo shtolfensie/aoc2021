@@ -16,3 +16,9 @@ parse p = Parsec.parse p ""
 
 toDec :: [Bool] -> Int
 toDec = foldl (\y x -> fromEnum x + y*2) 0
+
+toDec' :: [Char] -> Int
+toDec' = foldl (\y x -> fromEnum x + y*2) 0 . map (=='1')
+
+multPair :: (Int, Int) -> Int
+multPair = uncurry (*)
