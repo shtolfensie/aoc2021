@@ -18,6 +18,9 @@ interactw f = Prelude.interact $ (++"\n") . show . f . words
 interacts :: Show a => String -> ([String] -> a) -> IO()
 interacts p f = Prelude.interact $ (++"\n") . show . f . Split.splitOn p
 
+interactls :: Show a => String -> ([[String]] -> a) -> IO()
+interactls p f = Prelude.interact $ (++"\n") . show . f . map (Split.splitOn p) . lines
+
 interactl :: Show a => ([String] -> a) -> IO ()
 interactl f = Prelude.interact $ (++"\n") . show . f . lines
 
