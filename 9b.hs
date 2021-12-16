@@ -72,8 +72,6 @@ filterMask (m:ms) (l:ls) = g m l : filterMask ms ls
 filterMask [] [] = []
 filterMask _ _ = []
 
-toArr :: Int -> Int -> [[a]] -> Array (Int, Int) a
-toArr col row = listArray ((0,0), (row-1, col-1)) . concat
 
 
 
@@ -89,5 +87,3 @@ print2d [] = ""
 print2d1 :: [[[Bool]]] -> String
 print2d1 (l:ls) = (++print2d1 ls) $ (++"\n") $ show $ map (map fromEnum) l
 print2d1 [] = ""
-
-printArray arr = unlines [unwords [show (arr ! (x, y)) | y <- [0..9]] | x <- [0..4]]

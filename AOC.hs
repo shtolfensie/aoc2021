@@ -9,6 +9,7 @@ import qualified Text.Parsec as Parsec
 
 import qualified Data.List.Split as Split
 
+import qualified Data.Array as A
 import Data.Char
 
 interactw :: Show a => ([String] -> a) -> IO()
@@ -56,3 +57,11 @@ multPair = uncurry (*)
 
 ints :: [String] -> [Int]
 ints = map read
+
+
+-- arrays
+
+toArr :: Int -> Int -> [[a]] -> A.Array (Int, Int) a
+toArr col row = A.listArray ((0,0), (row-1, col-1)) . concat
+
+-- printArray arr = unlines [unwords [show (arr A.! (x, y)) | y <- [0..9]] | x <- [0..4]]
