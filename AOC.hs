@@ -24,6 +24,11 @@ interactls p f = Prelude.interact $ (++"\n") . show . f . map (Split.splitOn p) 
 interactl :: Show a => ([String] -> a) -> IO ()
 interactl f = Prelude.interact $ (++"\n") . show . f . lines
 
+-- | Doesn't call show on result, expects a string from f.
+-- | This allows for formatted strings to be printed.
+interactl' :: ([String] -> String) -> IO ()
+interactl' f = Prelude.interact $ ('\n':) . (++"\n") . f . lines
+
 
 rights (Right x:xs) = x: rights xs
 rights (_:xs) = rights xs
